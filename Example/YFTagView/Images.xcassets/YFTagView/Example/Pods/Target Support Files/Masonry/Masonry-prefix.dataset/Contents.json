@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "Masonry-prefix.pch",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

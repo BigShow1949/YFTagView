@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "Pods-YFTagView_Tests-Info.plist",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

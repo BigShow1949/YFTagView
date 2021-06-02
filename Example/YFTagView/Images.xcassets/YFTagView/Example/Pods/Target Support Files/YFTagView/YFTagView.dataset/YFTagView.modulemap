@@ -1,0 +1,6 @@
+framework module YFTagView {
+  umbrella header "YFTagView-umbrella.h"
+
+  export *
+  module * { export * }
+}

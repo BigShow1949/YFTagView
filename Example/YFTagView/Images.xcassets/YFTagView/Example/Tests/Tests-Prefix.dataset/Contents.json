@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "Tests-Prefix.pch",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

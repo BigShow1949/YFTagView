@@ -1,0 +1,23 @@
+PODS:
+  - Masonry (1.1.0)
+  - YFTagView (0.1.0)
+
+DEPENDENCIES:
+  - Masonry
+  - YFTagView (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Masonry
+
+EXTERNAL SOURCES:
+  YFTagView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  YFTagView: 29b534238153307f200d3f6ba3b3915b88435482
+
+PODFILE CHECKSUM: e724789752791a5208d0d6c54942b58eddb2a2cf
+
+COCOAPODS: 1.10.1

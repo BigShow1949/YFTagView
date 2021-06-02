@@ -1,0 +1,14 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'YFTagView_Example' do
+  pod 'YFTagView', :path => '../'
+  pod 'Masonry'
+
+  target 'YFTagView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
