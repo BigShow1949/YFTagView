@@ -14,27 +14,17 @@
 
 @implementation YFTagButton
 
-+ (UIImage *)imageWithName:(NSString *)img {
-    NSURL *associateBundleURL = [[NSBundle mainBundle] URLForResource:@"Frameworks" withExtension:nil];
-    associateBundleURL = [associateBundleURL URLByAppendingPathComponent:@"YFTagView"];
-    associateBundleURL = [associateBundleURL URLByAppendingPathExtension:@"framework"];
-    NSBundle *associateBunle = [NSBundle bundleWithURL:associateBundleURL];
-    associateBundleURL = [associateBunle URLForResource:@"YFTagView" withExtension:@"bundle"];
-    NSBundle *bundle = [NSBundle bundleWithURL:associateBundleURL];
-    UIImage *image3  = [UIImage imageNamed:img
-      inBundle: bundle
-    compatibleWithTraitCollection:nil];
-    return image3;
-}
-
 + (instancetype)buttonWithTag:(YFTag *)tag {
 	YFTagButton *btn = [super buttonWithType:UIButtonTypeCustom];
     btn.YFTag = tag;
-        
-    [btn setImage:[self imageWithName:@"tag"] forState:UIControlStateNormal];
-    [btn setImage:[self imageWithName:@"tag_selected"] forState:UIControlStateSelected];
-
-    [btn layoutButtonWithEdgeInsetsStyle:LLButtonStyleTextRight imageTitleSpace:5];
+    if (tag.image) {
+        [btn setImage:tag.image forState:UIControlStateNormal];
+        [btn layoutButtonWithEdgeInsetsStyle:LLButtonStyleTextRight imageTitleSpace:5];
+    }
+    
+    if (tag.selectImage) {
+        [btn setImage:tag.selectImage forState:UIControlStateSelected];
+    }
     
 	if (tag.attributedText) {
 		[btn setAttributedTitle: tag.attributedText forState: UIControlStateNormal];
@@ -53,13 +43,12 @@
     
     btn.selected = tag.isSelect;
 	btn.backgroundColor = tag.bgColor;
-	btn.contentEdgeInsets = tag.padding;
+	btn.contentEdgeInsets = tag.edgeInsets;
 	btn.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 	
     if (tag.bgImg) {
         [btn setBackgroundImage: tag.bgImg forState: UIControlStateNormal];
     }
-
     
     if (btn.selected) {
         if (tag.selectborderColor) {

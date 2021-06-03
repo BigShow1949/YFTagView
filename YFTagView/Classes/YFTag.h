@@ -9,10 +9,21 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#define YFTagDefaultImage
+typedef NS_ENUM(NSInteger, YFTagStyle) {
+    YFTagStyleText = 0,     // 默认状态：文字 可加图片
+    YFTagStyleDelete,       // 删除状态：右上角有个×图片（还没有做）
+    YFTagStyleDeleteShake,  // 抖动删除：删除状态的前提抖动起来（还没有做）
+};
+
+
 @interface YFTag : NSObject
 
-@property (nonatomic,copy,nullable) NSString *imageName;
-@property (nonatomic,copy,nullable) NSString *imageSelectedName;
+@property (nonatomic,strong,nullable,readonly) UIImage *imageDefault;
+@property (nonatomic,strong,nullable,readonly) UIImage *selectImageDefault;
+
+@property (nonatomic,strong,nullable) UIImage *image;
+@property (nonatomic,strong,nullable) UIImage *selectImage;
 
 @property (copy, nonatomic, nullable) NSString *text;
 @property (copy, nonatomic, nullable) NSAttributedString *attributedText;
@@ -32,7 +43,7 @@
 @property (assign, nonatomic) CGFloat borderWidth;
 
 ///like padding in css
-@property (assign, nonatomic) UIEdgeInsets padding;
+@property (assign, nonatomic) UIEdgeInsets edgeInsets;
 @property (strong, nonatomic, nullable) UIFont *font;
 ///if no font is specified, system font with fontSize is used
 @property (assign, nonatomic) CGFloat fontSize;
@@ -43,5 +54,5 @@
 
 - (nonnull instancetype)initWithText: (nonnull NSString *)text;
 + (nonnull instancetype)tagWithText: (nonnull NSString *)text;
-// 24
+
 @end

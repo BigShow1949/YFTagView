@@ -62,10 +62,10 @@
     
     NSArray *subviews = self.subviews;
     UIView *previousView = nil;
-    CGFloat topPadding = self.padding.top;
-    CGFloat bottomPadding = self.padding.bottom;
-    CGFloat leftPadding = self.padding.left;
-    CGFloat rightPadding = self.padding.right;
+    CGFloat topPadding = self.edgeInsets.top;
+    CGFloat bottomPadding = self.edgeInsets.bottom;
+    CGFloat leftPadding = self.edgeInsets.left;
+    CGFloat rightPadding = self.edgeInsets.right;
     CGFloat itemSpacing = self.interitemSpacing;
     CGFloat lineSpacing = self.lineSpacing;
     CGFloat currentX = leftPadding;
@@ -154,9 +154,9 @@
     
     NSArray *subviews = self.subviews;
     UIView *previousView = nil;
-    CGFloat topPadding = self.padding.top;
-    CGFloat leftPadding = self.padding.left;
-    CGFloat rightPadding = self.padding.right;
+    CGFloat topPadding = self.edgeInsets.top;
+    CGFloat leftPadding = self.edgeInsets.left;
+    CGFloat rightPadding = self.edgeInsets.right;
     CGFloat itemSpacing = self.interitemSpacing;
     CGFloat lineSpacing = self.lineSpacing;
     CGFloat currentX = leftPadding;
@@ -201,10 +201,10 @@
 #pragma mark - IBActions
 
 - (void)onTag:(YFTagButton *)btn{
-    if (self.tagViewStyle == YFTagViewStyleDefault) {
+    if (self.tagViewStyle == YFTagViewSelectStyleNone) {
         
     }
-    if(self.tagViewStyle == YFTagViewStyleOnlySelectOne){
+    if(self.tagViewStyle == YFTagViewSelectStyleOne){
         btn.selected = YES;
         [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             YFTagButton *bnt = (YFTagButton *)obj;
@@ -216,7 +216,7 @@
             }
         }];
     }
-    if (self.tagViewStyle == YFTagViewStyleCanSelectMore) {
+    if (self.tagViewStyle == YFTagViewSelectStyleMore) {
         btn.selected = !btn.selected;
     }
     

@@ -9,18 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "YFTag.h"
 
-typedef NS_ENUM(NSInteger, YFTagViewStyle) {
-    YFTagViewStyleDefault = 0,      //不可选
-    YFTagViewStyleOnlySelectOne,   //单选
-    YFTagViewStyleCanSelectMore   //多选
+typedef NS_ENUM(NSInteger, YFTagViewSelectStyle) {
+    YFTagViewSelectStyleNone = 0,  // 不可选 默认
+    YFTagViewSelectStyleOne,       // 单选
+    YFTagViewSelectStyleMore       // 多选
 };
 
 @interface YFTagView : UIView
 
-@property (nonatomic, assign) YFTagViewStyle tagViewStyle;//是否可以进行多选
+@property (nonatomic, assign) YFTagViewSelectStyle tagViewStyle;//是否可以进行多选
 
 
-@property (assign, nonatomic) UIEdgeInsets padding;
+@property (assign, nonatomic) UIEdgeInsets edgeInsets;
 @property (assign, nonatomic) CGFloat lineSpacing;
 @property (assign, nonatomic) CGFloat interitemSpacing;
 @property (assign, nonatomic) CGFloat preferredMaxLayoutWidth;
