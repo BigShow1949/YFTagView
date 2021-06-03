@@ -104,4 +104,27 @@
     return color;
 }
 
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    
+    self.YFTag.isSelect = selected;
+    
+    if (self.YFTag.borderColor) {
+        if (!selected) {
+            self.layer.borderColor = self.YFTag.borderColor.CGColor;
+        }
+    }
+
+    if (self.YFTag.selectborderColor) {
+        if (selected) {
+            self.layer.borderColor = self.YFTag.selectborderColor.CGColor;
+        }
+    }
+}
+
+
+
+
+
+
 @end

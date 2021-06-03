@@ -11,8 +11,13 @@
 
 
 @interface YFTagView ()
+/** 数据源tags数组 */
+@property (strong, nonatomic, nullable) NSMutableArray <YFTag *>*tagsArr;
+/** 选中的tags数组 */
+@property (nonatomic,strong,nullable) NSMutableArray <YFTag *>*selectedTagsArr;
+/** 选中的tags的index数组 */
+@property (nonatomic,strong,nullable) NSMutableArray <NSNumber *>*selectedTagsIndexArr;
 
-@property (strong, nonatomic, nullable) NSMutableArray *tags;
 @property (assign, nonatomic) BOOL didSetup;
 @property (nonatomic,assign) BOOL isIntrinsicWidth;  //!<是否宽度固定
 @property (nonatomic,assign) BOOL isIntrinsicHeight; //!<是否高度固定
@@ -56,7 +61,7 @@
 #pragma mark - Lifecycle
 
 -(CGSize)intrinsicContentSize {
-    if (!self.tags.count) {
+    if (!self.tagsArr.count) {
         return CGSizeZero;
     }
     
@@ -123,11 +128,25 @@
 
 #pragma mark - Custom accessors
 
-- (NSMutableArray *)tags {
-    if(!_tags) {
-        _tags = [NSMutableArray array];
+- (NSMutableArray *)tagsArr {
+    if(!_tagsArr) {
+        _tagsArr = [NSMutableArray array];
     }
-    return _tags;
+    return _tagsArr;
+}
+
+- (NSMutableArray<YFTag *> *)selectedTagsArr {
+    if (!_selectedTagsArr) {
+        _selectedTagsArr = [NSMutableArray array];
+    }
+    return  _selectedTagsArr;;
+}
+
+- (NSMutableArray<NSNumber *> *)selectedTagsIndexArr {
+    if (!_selectedTagsIndexArr) {
+        _selectedTagsIndexArr = [NSMutableArray array];
+    }
+    return _selectedTagsIndexArr;
 }
 
 //- (NSMutableArray *)bntArray{
@@ -147,8 +166,21 @@
 
 #pragma mark - Private
 
+- (void)updateSelectedTags {
+    [self.selectedTagsArr removeAllObjects];
+    [self.selectedTagsIndexArr removeAllObjects];
+    
+    for (YFTag *tag in self.tagsArr) {
+        NSInteger index = [self.tagsArr indexOfObject:tag];
+        if (tag.isSelect) {
+            [self.selectedTagsArr addObject:tag];
+            [self.selectedTagsIndexArr addObject:@(index)];
+        }
+    }
+}
+
 - (void)layoutTags {
-    if (self.didSetup || !self.tags.count) {
+    if (self.didSetup || !self.tagsArr.count) {
         return;
     }
     
@@ -210,9 +242,6 @@
             YFTagButton *bnt = (YFTagButton *)obj;
             if (bnt != btn) {
                 bnt.selected = NO;
-                if (bnt.YFTag.borderColor) {
-                    bnt.layer.borderColor = btn.YFTag.borderColor.CGColor;
-                }
             }
         }];
     }
@@ -220,18 +249,8 @@
         btn.selected = !btn.selected;
     }
     
-    if (btn.YFTag.borderColor) {
-        if (!btn.selected) {
-            btn.layer.borderColor = btn.YFTag.borderColor.CGColor;
-        }
-    }
-    
-    if (btn.YFTag.selectborderColor) {
-        if (btn.selected) {
-            btn.layer.borderColor = btn.YFTag.selectborderColor.CGColor;
-        }
-    }
-    
+    [self updateSelectedTags];
+
     if (self.didTapTagAtIndex) {
         self.didTapTagAtIndex([self.subviews indexOfObject:btn] ,btn);
     }
@@ -244,65 +263,73 @@
     YFTagButton *btn = [YFTagButton buttonWithTag:tag];
     [btn addTarget:self action:@selector(onTag:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview: btn];
-    [self.tags addObject: tag];
+    [self.tagsArr addObject: tag];
     
     self.didSetup = NO;
     [self invalidateIntrinsicContentSize];
+    
+    [self updateSelectedTags];
 }
 
 - (void)insertTag:(YFTag *)tag atIndex:(NSUInteger)index {
     NSParameterAssert(tag);
-    if (index + 1 > self.tags.count) {
+    if (index + 1 > self.tagsArr.count) {
         [self addTag:tag];
     } else {
         YFTagButton *btn = [YFTagButton buttonWithTag:tag];
         [btn addTarget:self action: @selector(onTag:) forControlEvents:UIControlEventTouchUpInside];
         [self insertSubview:btn atIndex:index];
-        [self.tags insertObject:tag atIndex:index];
+        [self.tagsArr insertObject:tag atIndex:index];
         
         self.didSetup = NO;
         [self invalidateIntrinsicContentSize];
     }
+    
+    [self updateSelectedTags];
 }
 
 - (void)removeTag: (YFTag *)tag {
     NSParameterAssert(tag);
-    NSUInteger index = [self.tags indexOfObject: tag];
+    NSUInteger index = [self.tagsArr indexOfObject: tag];
     if (NSNotFound == index) {
         return;
     }
     
-    [self.tags removeObjectAtIndex: index];
+    [self.tagsArr removeObjectAtIndex: index];
     if (self.subviews.count > index) {
         [self.subviews[index] removeFromSuperview];
     }
     
     self.didSetup = NO;
     [self invalidateIntrinsicContentSize];
+    [self updateSelectedTags];
 }
 
 - (void)removeTagAtIndex: (NSUInteger)index {
-    if (index + 1 > self.tags.count) {
+    if (index + 1 > self.tagsArr.count) {
         return;
     }
     
-    [self.tags removeObjectAtIndex: index];
+    [self.tagsArr removeObjectAtIndex: index];
     if (self.subviews.count > index) {
         [self.subviews[index] removeFromSuperview];
     }
     
     self.didSetup = NO;
     [self invalidateIntrinsicContentSize];
+    [self updateSelectedTags];
 }
 
 - (void)removeAllTags {
-    [self.tags removeAllObjects];
+    [self.tagsArr removeAllObjects];
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
     }
     
     self.didSetup = NO;
     [self invalidateIntrinsicContentSize];
+    [self updateSelectedTags];
 }
+
 
 @end

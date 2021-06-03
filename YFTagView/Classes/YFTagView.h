@@ -19,6 +19,13 @@ typedef NS_ENUM(NSInteger, YFTagViewSelectStyle) {
 
 @property (nonatomic, assign) YFTagViewSelectStyle tagViewStyle;//是否可以进行多选
 
+/** 数据源tags数组 */
+@property (strong, nonatomic,nullable,readonly) NSMutableArray <YFTag *>*tagsArr;
+/** 选中的tags数组 */
+@property (nonatomic,strong,nullable,readonly) NSMutableArray <YFTag *>*selectedTagsArr;
+/** 选中的tags的index数组 */
+@property (nonatomic,strong,nullable,readonly) NSMutableArray <NSNumber *>*selectedTagsIndexArr;
+
 
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
 @property (assign, nonatomic) CGFloat lineSpacing;
@@ -28,6 +35,7 @@ typedef NS_ENUM(NSInteger, YFTagViewSelectStyle) {
 @property (nonatomic, assign) CGFloat regularHeight; //!< 固定高度
 @property (assign, nonatomic) BOOL singleLine;
 @property (copy, nonatomic, nullable) void (^didTapTagAtIndex)(NSUInteger index , UIButton * _Nonnull bnt);
+
 
 - (void)addTag: (nonnull YFTag *)tag;
 - (void)insertTag: (nonnull YFTag *)tag atIndex:(NSUInteger)index;
