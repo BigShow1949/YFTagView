@@ -10,7 +10,7 @@
 #import "YFTag.h"
 
 #import "YFTagView.h"
-#import "UIButton+Extension_yf.h"
+#import <YFPositionButton/UIButton+Position.h>
 
 @implementation YFTagButton
 
@@ -19,7 +19,7 @@
     btn.YFTag = tag;
     if (tag.image) {
         [btn setImage:tag.image forState:UIControlStateNormal];
-        [btn layoutButtonWithEdgeInsetsStyle:LLButtonStyleTextRight imageTitleSpace:5];
+        [btn layoutButtonWithEdgeInsetsStyle:YFPositionButtonTextRight imageTitleSpace:5];
     }
     
     if (tag.selectImage) {

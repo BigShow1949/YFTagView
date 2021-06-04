@@ -325,11 +325,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-YFTagView_Example/Pods-YFTagView_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/YFPositionButton/YFPositionButton.framework",
 				"${BUILT_PRODUCTS_DIR}/YFTagView/YFTagView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YFPositionButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YFTagView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

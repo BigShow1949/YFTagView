@@ -1,14 +1,18 @@
 PODS:
   - Masonry (1.1.0)
-  - YFTagView (0.0.1)
+  - YFPositionButton (0.0.2)
+  - YFTagView (0.0.2):
+    - YFPositionButton (~> 0.0.2)
 
 DEPENDENCIES:
   - Masonry
+  - YFPositionButton
   - YFTagView (from `../`)
 
 SPEC REPOS:
   trunk:
     - Masonry
+    - YFPositionButton
 
 EXTERNAL SOURCES:
   YFTagView:
@@ -16,8 +20,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  YFTagView: 4cdfee706d671da443a446180f8c3dde4c5694d5
+  YFPositionButton: 1adcbced469d4386c0f7a0dc446386987e52be07
+  YFTagView: 9099fd3b3476e59fb189219cc4165122df4eb08a
 
-PODFILE CHECKSUM: e724789752791a5208d0d6c54942b58eddb2a2cf
+PODFILE CHECKSUM: 5876aaa9f037003c3cb0c00fa9c9771f0a54159a
 
 COCOAPODS: 1.10.1

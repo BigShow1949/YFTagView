@@ -1,0 +1,6 @@
+framework module YFPositionButton {
+  umbrella header "YFPositionButton-umbrella.h"
+
+  export *
+  module * { export * }
+}
